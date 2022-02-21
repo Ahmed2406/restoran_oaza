@@ -1,0 +1,142 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navigacija {
+    top: 10px;
+    border-radius: 3px;
+    transition: all .7s;
+}
+
+.navbar .logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-item .active::before,
+.nav-item .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    transition: 1s;
+    background-color: rgb(204, 133, 0);
+}
+
+.nav-item .active::before,
+.nav-item .nav-link:hover:after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .nav-item .active::before,
+    .nav-item .nav-link:hover:after {
+        width: 0;
+    }
+    .navbar .nav-item .active,
+    .navbar .nav-link:hover {
+        color: rgb(204, 133, 0) !important;
+    }
+}
+
+.navbar-scroll {
+    position: fixed;
+    top: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.navbar.active {
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+}
+.navbar .prijava {
+    border-radius: 7px;
+    border: 2px solid rgb(255, 255, 255);
+    transition: .6s;
+}
+.navbar .prijava:hover {
+    border: 2px solid rgb(8, 73, 8);
+    background: rgb(8, 73, 8);
+}
+
+.logout {
+    transition: .6s;
+}
+
+.logout:hover {
+    color: rgb(204, 133, 0) !important;
+}
+
+
+/* --------------------------- POCETNA --------------------------- */
+.pocetna {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../slike/food.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.pocetna .jedan {
+    height: 100vh;
+}
+
+.pocetna .jedan .btn {
+    border: 2px solid white;
+    color: rgb(255, 255, 255);
+    margin: 20px 0;
+    transition: .5s;
+    display: block;
+    transition: all .7s ease-out;
+}
+
+.pocetna .jedan .btn:hover {
+    background-color: rgb(204, 133, 0);
+    border: 2px solid rgb(204, 133, 0);
+}
+
+.pocetna .jedan a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-family: 'Marck Script', cursive;
+}
+
+h6 {
+    font-family: 'Courgette', cursive;
+}
+
+@media (min-width: 1024px) {
+    h1 {
+        font-size: 45px;
+    }
+    h2 {
+        font-size: 40px;
+    }
+}
+
+.line {
+    height: 3px;
+    width: 100px;
+    background-color: rgb(204, 133, 0);
+}
+
+footer .ikone i {
+    transition: .5s;
+}
+footer .ikone i:hover {
+    color: rgb(204, 133, 0);
+}

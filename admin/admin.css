@@ -1,0 +1,55 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    transition: .5s;
+}
+.sidebar.active {
+    width: 68px;
+}
+.sidebar.active .header h4 {
+    display: none;
+}
+.sidebar.active .header h4 {
+    display: none;
+}
+.sidebar.active .nav-link span {
+    visibility: hidden;
+    transition: .4s ease !important;
+}
+.sidebar.active .admin {
+    display: none !important;
+}
+
+.toggle i {
+    transition: .6s;
+    cursor: pointer;
+}
+.toggle i:hover {
+    color: red !important;
+}
+.nav-item:hover {
+    background: rgb(22, 20, 20);
+}
+
+
+/*-----------------------------------------------*/
+
+
+
+.main-page {
+    position: fixed;
+    width: calc(100% - 250px);
+    height: 70px;
+    top: 0;
+    left: 250px;
+    transition: .5s;
+}
+
+.main-page.active {
+    width: calc(100% - 68px);
+    left: 68px;
+}
