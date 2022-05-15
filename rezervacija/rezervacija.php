@@ -4,7 +4,7 @@
 
     if(!isset($_SESSION['email']))
     {
-        header("location: ../index.php?error=Prvoseprijavite");
+        header("location: ../index.php?error=nistePrijavljeni!");
         exit();
     }
                     
@@ -45,10 +45,13 @@
                     <form class="p-3" action="../includes/rezervacija.inc.php" method="POST">
                         <?php 
                             $email = $_SESSION ['email'];                            
-                            $data = $conn->prepare("SELECT ime, prezime, email, datum, vrijeme, broj_osoba FROM rezervacija where email = ?");
+                            $data = $conn->prepare("SELECT ime, prezime, email FROM korisnici where email = ?");
                             $data->execute(array($email));
 
-                            $row = $data->fetch(PDO::FETCH_ASSOC);
+                        ?>
+
+                        <?php 
+                        while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
                             
                         ?>
 
@@ -79,18 +82,24 @@
                         <div class="mb-4">
                             <select class="form-select" aria-label="Default select example" name="broj_osoba">
                                 <option selected>Odredite broj osoba</option>
-                                <option value=" 1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                                <option value="3">5</option>
-                                <option value="3">5+</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>5+</option>
                             </select>
+                        </div>
+                        <div class="mb-3 col-lg-6">
+                            <input type="text" class="form-control" id="stanje" name="stanje" value="na čekanju" hidden>
                         </div>
                         <div class="d-grid mb-3">
                             <button class="btn text-white" type="submit" name="submit">REZERVIŠI</button>
                         </div>
 
+                        <?php 
+                        }
+                        ?>
                     </form>
                     <div class="izlaz">
                         <a href="../index.php"><i class="bi bi-x"></i></a>

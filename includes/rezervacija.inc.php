@@ -13,6 +13,7 @@
         $datum = $_POST ['datum'];
         $vrijeme = $_POST ['vrijeme'];
         $broj_osoba = $_POST ['broj_osoba'];
+        $stanje = $_POST ['stanje'];
 
         if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['datum']) || empty($_POST['vrijeme']) || empty($_POST['broj_osoba'])) {
             header("location: ../rezervacija/rezervacija.php?error=praznapolja");
@@ -20,7 +21,7 @@
         }
     
     
-        createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $broj_osoba);
+        createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $broj_osoba, $stanje);
     }
     else {
         header("location: ../rezervacija/rezervacija.php");

@@ -15,10 +15,6 @@
     object-fit: cover;
 }
 
-.navbar .nav-link {
-    position: relative;
-}
-
 .nav-item .active::before,
 .nav-item .nav-link::after {
     content: "";
@@ -36,17 +32,7 @@
     width: 100%;
 }
 
-.navbar .prijava {
-    border-radius: 7px;
-    border: 2px solid rgb(255, 255, 255);
-    transition: .6s;
-}
-.navbar .prijava:hover {
-    border: 2px solid rgb(8, 73, 8);
-    background: rgb(8, 73, 8);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .nav-item .active::before,
     .nav-item .nav-link:hover:after {
         width: 0;
@@ -55,10 +41,12 @@
     .navbar .nav-link:hover {
         color: rgb(204, 133, 0) !important;
     }
-}
-.navbar-toggler span{
-    color: white;
-    font-size: 30px;
+    .navbar .prijava {
+        margin-left: 0 !important;
+    }
+    .navbar .user {
+        margin-left: 0 !important;
+    }
 }
 
 .navbar-scroll {
@@ -71,6 +59,26 @@
 .navbar.active {
     background: rgba(0, 0, 0, 0.8);
     top: 0;
+}
+.navbar .prijava {
+    border-radius: 7px;
+    border: 2px solid rgb(255, 255, 255);
+    transition: .6s;
+    margin-left: 40px;
+}
+
+
+.navbar .prijava:hover {
+    border: 2px solid rgb(8, 73, 8);
+    background: rgb(8, 73, 8);
+}
+
+.logout {
+    transition: .6s;
+}
+
+.logout:hover {
+    color: red !important;
 }
 
 .testt {

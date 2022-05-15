@@ -17,7 +17,6 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
-
 .navbar .nav-item .active::before,
 .navbar .nav-item .nav-link::after {
     content: "";
@@ -29,30 +28,25 @@ body {
     transition: 1s;
     background-color: rgb(204, 133, 0);
 }
-
 .navbar .nav-item .active::before,
 .navbar .nav-item .nav-link:hover:after {
     width: 100%;
 }
 
-.navbar .prijava {
-    border-radius: 7px;
-    border: 2px solid rgb(255, 255, 255);
-    transition: .6s;
-}
-.navbar .prijava:hover {
-    border: 2px solid rgb(8, 73, 8);
-    background: rgb(8, 73, 8);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .navbar .nav-item .active::before,
     .navbar .nav-item .nav-link:hover:after {
         width: 0;
     }
-    .navbar .nav-item .active,
-    .navbar .nav-link:hover {
+    .navbar .navbar .nav-item .active,
+    .navbar .navbar .nav-link:hover {
         color: rgb(204, 133, 0) !important;
+    }
+    .navbar .navbar .prijava {
+        margin-left: 0 !important;
+    }
+    .navbar .user {
+        margin-left: 0 !important;
     }
 }
 
@@ -67,6 +61,25 @@ body {
     background: rgba(0, 0, 0, 0.8);
     top: 0;
 }
+.navbar .prijava {
+    border-radius: 7px;
+    border: 2px solid rgb(255, 255, 255);
+    transition: .6s;
+    margin-left: 40px;
+}
+.navbar .prijava:hover {
+    border: 2px solid rgb(8, 73, 8);
+    background: rgb(8, 73, 8);
+}
+
+.logout {
+    transition: .6s;
+}
+
+.logout:hover {
+    color: red !important;
+}
+
 
 .naslov {
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../slike/heading.jfif);
@@ -88,53 +101,51 @@ body {
 
 /* ----------------------------- MENI ----------------------------- */
 
-.meni-box {
+
+.meni {
     border-radius: 7px;
     -webkit-box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81); 
     box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81);
 }
-.meni-box .header {
+.meni-ponuda {
+    background: rgb(36, 36, 36);
+    border-radius: 0 0 7px 7px;
+}
+.meni .meni-header {
     background: rgb(165, 69, 0);
-    position: relative;
     border-radius: 7px 7px 0 0;
 }
-.meni-box .header .gif img {
+.meni .meni-header .gif img {
     width: 60px;
     height: 60px;
     color: white;
 }
-.meni-box .header ul li a {
+.meni .meni-header ul li a {
     transition: .7s;
     color: black;
 }
-.meni-box .header ul li a:hover {
+.meni .meni-header ul li .active,
+.meni .meni-header ul li a:hover {
     color: white;
 }
-.ponuda-box {
-    
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    padding: 20px;
-    border-radius: 0 0 7px 7px;
-}
-.ponuda-box .ponuda-text {
+
+.meni .meni-ponuda .ponuda-text {
     text-align: center;
     color: white;
     padding: 10px 0;
 }
-.ponuda-box .ponuda-text .line1, .line2 {
+.meni .meni-ponuda .ponuda-text .line1, .line2 {
     width: 100px;
     height: 2px;
     background-color: rgb(143,140,140);
     margin: 2px 0;
 }
-.ponuda-box .ponuda-text .simbol img {
+.meni .meni-ponuda .ponuda-text .simbol img {
     width: 40px;
     height: 40px;
     margin: 0 5px;
 }
-.ponuda .box {
+.meni .meni-ponuda .box {
     width: 210px;
     height: 290px;
     background-color: rgb(197, 197, 197);
@@ -144,11 +155,11 @@ body {
     box-shadow: 5px 4px 4px 2px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
-.ponuda .box:hover {
+.meni .meni-ponuda .box:hover {
     background: rgb(158, 158, 158);
     transform: scale(1.01);
 }
-.ponuda .box .slika {
+.meni .meni-ponuda .box .slika {
     height: 100%;
 }
 .ponuda .box img {
@@ -169,6 +180,9 @@ body {
     font-weight: bold;
 }
 
+footer {
+    background-color: black;
+}
 footer .ikone i {
     transition: .5s;
 }

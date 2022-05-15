@@ -32,7 +32,7 @@
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .nav-item .active::before,
     .nav-item .nav-link:hover:after {
         width: 0;
@@ -40,6 +40,12 @@
     .navbar .nav-item .active,
     .navbar .nav-link:hover {
         color: rgb(204, 133, 0) !important;
+    }
+    .navbar .prijava {
+        margin-left: 0 !important;
+    }
+    .navbar .user {
+        margin-left: 0 !important;
     }
 }
 
@@ -58,6 +64,7 @@
     border-radius: 7px;
     border: 2px solid rgb(255, 255, 255);
     transition: .6s;
+    margin-left: 40px;
 }
 .navbar .prijava:hover {
     border: 2px solid rgb(8, 73, 8);
@@ -69,7 +76,7 @@
 }
 
 .logout:hover {
-    color: rgb(204, 133, 0) !important;
+    color: red !important;
 }
 
 
@@ -133,7 +140,9 @@ h6 {
     width: 100px;
     background-color: rgb(204, 133, 0);
 }
-
+footer {
+    background-color: black;
+}
 footer .ikone i {
     transition: .5s;
 }

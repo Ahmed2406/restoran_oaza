@@ -1,7 +1,8 @@
 <?php
 	require '../includes/baza.php';
 	session_start();
-    $email = $_SESSION['email'];
+
+    
 ?>
 
 <!doctype php>
@@ -18,6 +19,9 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
+        <link rel="stylesheet" href="../css/icon/css/all.min.css" />
+
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         <link rel="stylesheet" href="kontakt.css">
 
@@ -31,7 +35,7 @@
     <body>
 
 
-        <nav class="navbar navigacija container-fluid navbar-expand-md fixed-top">
+        <nav class="navbar navigacija container-fluid navbar-expand-lg fixed-top">
             <div class="container-fluid container-lg test">
                 <a class="navbar-brand" href="#"><img src="../slike/logo.jpg" class="logo" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -39,78 +43,101 @@
                     <span class="bi bi-list"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1" aria-current="page" href="../index.php">POČETNA</a>
+                            <a class="nav-link  text-white pb-1 position-relative" aria-current="page"
+                                href="../index.php">POČETNA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1" href="../o-nama/o-nama.php">O NAMA</a>
+                            <a class="nav-link  text-white pb-1 position-relative" href="../o-nama/o-nama.php">O
+                                NAMA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1" href="../meni/meni.php">MENI</a>
+                            <a class="nav-link  text-white pb-1 position-relative" href="../meni/meni.php">MENI</a>
                         </li>
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1" href="../galerija/galerija.php">GALERIJA</a>
+                            <a class="nav-link text-white pb-1 position-relative"
+                                href="../galerija/galerija.php">GALERIJA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link active text-white pb-1" href="kontakt/kontakt.php">KONTAKT</a>
+                            <a class="nav-link active text-white pb-1 position-relative" href="">KONTAKT</a>
                         </li>
+                        <?php
+                                if(isset($_SESSION['email']))
+                                {
+                                    $id = $_SESSION['email'];
+                                    $sql = $conn->prepare("SELECT * FROM `korisnici` WHERE `email`='$id'");
+                                    $sql->execute();
+                                    $fetch = $sql->fetch();
+			                ?>
+
+                        <li class="px-2 text-center user" style="margin-left: 40px;">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="dropdown">
+                                    <a class="btn btn-success dropdown-toggle second-text fw-bold text-white" href="#"
+                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fas fa-user me-2"></i>
+                                        <?php echo $fetch['ime']?>
+                                        <?php echo $fetch['prezime']?>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li class="d-flex justify-content-center align-items-center">
+                                            <a class="dropdown-item d-flex justify-beetwen align-items-center"
+                                                href="../mojeRezervacije/mojeRezervacije.php">Rezervacije
+                                                <span class="ms-3 px-2 text-success bg-dark rounded-circle">
+                                                    <?php 
+                                                            $email = $_SESSION['email'];
+                                                            $stmt = $conn->prepare("SELECT ime, prezime, email, datum, vrijeme, broj_osoba FROM rezervacija WHERE email = ?");
+                                                            $stmt->execute(array($email));
+                                                            $row = $stmt->rowCount();
+                                                            if($row) {
+                                                                echo $row;
+                                                            }
+                                                            else {
+                                                                echo $row;
+                                                            }
+                                                        ?>
+                                                </span>
+                                            </a>
+
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item d-flex justify-beetwen align-items-center"
+                                                href="../mojePoruke/mojePoruke.php">Poruke
+                                                <span class="ms-3 px-2 text-success bg-dark rounded-circle">
+                                                    <?php 
+                                                            $email = $_SESSION['email'];
+                                                            $stmt = $conn->prepare("SELECT ime, prezime, email, poruka FROM poruke WHERE email = ?");
+                                                            $stmt->execute(array($email));
+                                                            $row = $stmt->rowCount();
+                                                            if($row) {
+                                                                echo $row;
+                                                            }
+                                                            else {
+                                                                echo $row;
+                                                            }
+                                                        ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="../includes/logout.php">Odjava</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <?php
+                                }   
+                                else {
+			                ?>
                     </ul>
-                    <?php
-                    if(isset($_SESSION['email']))
-                    {
-                        $id = $_SESSION['email'];
-                        $sql = $conn->prepare("SELECT * FROM `korisnici` WHERE `email`='$id'");
-				$sql->execute();
-				$fetch = $sql->fetch();
-		                
-			    ?>
 
-                    <div class="korisnik d-flex justify-content-center align-items-center flex-md-row text-white">
-                        <div class="info d-flex justify-content-center align-items-center mx-lg-5">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <i class="bi bi-person-circle fs-1"></i>
-                                <div class="px-2 text-center">
-
-
-                                    <m class="m-0"><?php echo $fetch['ime']?></m>
-                                    <p class="m-0"><?php echo $fetch['prezime']?></p>
-                                </div>
-                            </div>
-                            <a href="../mojeRezervacije/mojeRezervacije.php"
-                                class="rezervacije text-white position-relative">
-                                <i class="bi bi-clipboard-check fs-2 mx-2"></i>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?php 
-                                    $stmt = $conn->prepare("SELECT ime, prezime, email, datum, vrijeme, broj_osoba FROM rezervacija WHERE email = ?");
-                                    $stmt->execute(array($email));
-                                    $row = $stmt->rowCount();
-                                    if($row) {
-                                        echo $row;
-                                    }
-                                    else {
-                                        echo "nema";
-                                    }
-                                ?>
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                            </a>
-                        </div>
-                        <a href="../includes/logout.php" class="logout text-white">
-                            <i class="bi bi-box-arrow-right fs-2"></i>
-                        </a>
-                    </div>
-                    <?php 
-                    }
-                    else 
-                    {
-                ?>
                     <a href="../prijava/prijava.php" class="btn prijava text-white">Prijava</a>
 
                     <?php 
-                    }  
-                ?>
+                            }  
+                        ?>
                 </div>
             </div>
         </nav>
@@ -120,37 +147,85 @@
 
 
 
-        <div class="contact d-flex justify-content-center align-items-center">
-            <div class="container">
+        <div class="contact d-flex justify-content-center align-items-center"
+            style="height: max-content; min-height: 100vh; padding: 100px 0;">
+            <div class="container" style="height:max-content">
                 <div class="row bg-dark text-light testt"
                     style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-radius: 7px;">
                     <div class="col-md-6 col-lg-5 jedan py-4">
                         <h3>KONTAKT</h3>
-                        <form>
+                        <form action="../includes/kontakt.inc.php" method="POST">
+
+                            <?php 
+                            
+                            if(isset($_SESSION['email']))
+                                {
+                                    $id = $_SESSION['email'];
+                                    $sql = $conn->prepare("SELECT * FROM `korisnici` WHERE `email`='$id'");
+                                    $sql->execute();
+                                    $fetch = $sql->fetch();
+                                
+			                ?>
+
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
                                     <label for="ime" class="form-label">Ime</label>
-                                    <input type="text" class="form-control" id="ime">
+                                    <input type="text" name="ime" class="form-control" id="ime"
+                                        value="<?php echo $fetch['ime']?>" placeholder="Ime" readonly>
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="perzime" class="form-label">Prezime</label>
-                                    <input type="text" class="form-control" id="perzime">
+                                    <input type="text" name="prezime" class="form-control" id="perzime"
+                                        value=" <?php echo $fetch['prezime']?>" placeholder="Prezime" readonly>
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email">
+                                <input type="email" name="email" class="form-control" id="email"
+                                    value=" <?php echo $fetch['email']?>" placeholder="Email" readonly>
                             </div>
-                            <div class="form-floating mb-2">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                    style="height: 100px"></textarea>
-                                <label class="text-dark" for="floatingTextarea2">Comments</label>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" name="poruka" placeholder="Leave a comment here"
+                                    id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label class="text-dark" for="floatingTextarea2">Poruka</label>
                             </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+                            <?php 
+                            
+                            }
+                            else {
+                                    
+			                ?>
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <label for="ime" class="form-label">Ime</label>
+                                    <input type="text" name="ime" class="form-control" id="ime" value=""
+                                        placeholder="Ime">
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="perzime" class="form-label">Prezime</label>
+                                    <input type="text" name="prezime" class="form-control" id="perzime"
+                                        placeholder="Prezime">
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-warning">Pošalji</button>
+                            <div class="mb-4">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" name="poruka" placeholder="Leave a comment here"
+                                    id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label class="text-dark" for="floatingTextarea2">Poruka</label>
+                            </div>
+
+                            <?php 
+                            }
+                            ?>
+
+                            <button type="submit" name="submit" class="btn btn-warning">Pošalji</button>
+
+
+
                         </form>
                     </div>
                     <div class="col-md-6 col-lg-7 dva p-1" style="border-radius: 0 7px 7px 0;">

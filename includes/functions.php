@@ -40,7 +40,6 @@ function createUser($conn, $ime, $prezime, $email, $adresa, $lozinka) {
         $query = $conn->prepare("INSERT INTO korisnici (ime, prezime, email, adresa, lozinka) 
         VALUES (:ime, :prezime, :email, :adresa, :lozinka)");
 
-        $hashlozinka = password_hash($lozinka, PASSWORD_DEFAULT);
 
         $query->execute(array(
             ':ime' => $ime,
@@ -51,7 +50,7 @@ function createUser($conn, $ime, $prezime, $email, $adresa, $lozinka) {
 
     
 
-            header("Location: ../registracija/registracija.php?succes=Uspjesnododano?");
+            header("Location: ../prijava/prijava.php?succes=uspjesnaRegistracija?");
     }   
 
     }
@@ -151,13 +150,13 @@ function loginAdmin($conn, $username, $pw)
 
 /* ---------------------- REZERVACIJA -------------------- */
 
-function createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $broj_osoba) {
+function createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $broj_osoba, $stanje) {
     if (!$conn) {
         header("Location: ../rezervacija/rezervacija.php?error=connectionfailed?" . $conn->error);
         exit();
     } else {
-        $query = $conn->prepare("INSERT INTO rezervacija (ime, prezime, email, datum, vrijeme, broj_osoba) 
-        VALUES (:ime, :prezime, :email, :datum, :vrijeme, :broj_osoba)");
+        $query = $conn->prepare("INSERT INTO rezervacija (ime, prezime, email, datum, vrijeme, broj_osoba, stanje) 
+        VALUES (:ime, :prezime, :email, :datum, :vrijeme, :broj_osoba, :stanje)");
 
         $hashvrijeme = password_hash($vrijeme, PASSWORD_DEFAULT);
 
@@ -167,17 +166,38 @@ function createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $bro
             ':email' => $email,
             ':datum' => $datum,
             ':vrijeme' => $vrijeme,
-            ':broj_osoba' => $broj_osoba));
+            ':broj_osoba' => $broj_osoba,
+            ':stanje' => $stanje));
 
     
 
-            header("Location: ../rezervacija/rezervacija.php?succes=Uspjesnododano?");
+            header("Location: ../index.php?succes=uspjesnaRezervacija?");
     }   
 
     }
 
 
+function posaljiPoruku($conn, $ime, $prezime, $email, $poruka) {
+    if (!$conn) {
+        header("Location: ../kontakt/kontakt.php?error=connectionfailed?" . $conn->error);
+        exit();
+    } else {
+        $query = $conn->prepare("INSERT INTO poruke (ime, prezime, email, poruka) 
+        VALUES (:ime, :prezime, :email, :poruka)");
 
+
+        $query->execute(array(
+            ':ime' => $ime,
+            ':prezime' => $prezime,
+            ':email' => $email,
+            ':poruka' => $poruka));
+
+    
+
+            header("Location: ../kontakt/kontakt.php?succes=uspjesnoPolsanaPoruka?");
+    }   
+
+    }
 
 
 
@@ -185,17 +205,106 @@ function createReservation($conn, $ime, $prezime, $email, $datum, $vrijeme, $bro
 /* ---------------------- ADMIN - DODAJ KORISNIKA -------------------- */
 
 
-function dodajKorisnika($conn, $ime, $prezime, $email, $username, $pw) {
+ function dodajKorisnika($conn, $ime, $prezime, $email, $adresa, $lozinka) {
     if (!$conn) {
-        header("Location: ../admin/dodajkorisnika.php?error=dodavanjenijeuspjelo?" . $conn->error);
+        header("Location: ../admin/korisnici/urediKorisnika.php?error=connectionfailed?" . $conn->error);
         exit();
     } else {
-        $conn->query("INSERT INTO korisnici (ime, prezime, email, username, pw) VALUES ('$ime','$prezime','$email','$username','$pw');");
-        header("Location: ../admin/dodajkorisnika.php?success=korisnikuspjesnododan");
-        exit();
+        $query = $conn->prepare("INSERT INTO korisnici (ime, prezime, email, adresa, lozinka) 
+        VALUES (:ime, :prezime, :email, :adresa, :lozinka)");
+
+
+        $query->execute(array(
+            ':ime' => $ime,
+            ':prezime' => $prezime,
+            ':email' => $email,
+            ':adresa' => $adresa,
+            ':lozinka' => $lozinka));
+
+    
+
+            header("Location: ../admin/korisnici/korisnici.php?succes=uspjesnoDodanKorisnik?");
     }   
 
     }
+
+
+
+    function updateUser($conn, $id, $ime, $prezime, $email, $adresa, $lozinka) {
+    if (!$conn) {
+        header("Location: ../admin/korisnici/urediKorisnika.php?error=connectionfailed?" . $conn->error);
+        exit();
+    } else {
+        $query = $conn->prepare("UPDATE korisnici SET ime=:ime, prezime=:prezime, email=:email, adresa=:adresa, lozinka=:lozinka WHERE id=:id"); 
+            
+
+
+        $query->execute(array(
+            ':id' => $id,
+            ':ime' => $ime,
+            ':prezime' => $prezime,
+            ':email' => $email,
+            ':adresa' => $adresa,
+            ':lozinka' => $lozinka));
+
+    
+
+            header("Location: ../admin/korisnici/korisnici.php?succes=uspjesnaIzmjenaPodataka");
+    }   
+
+    }
+    
+
+
+    function updateRezervacija($conn, $id, $ime, $prezime, $email, $datum, $vrijeme, $broj_osoba, $stanje) {
+    if (!$conn) {
+        header("Location: ../admin/rezervacije/urediRezervaciju.php?error=connectionfailed?" . $conn->error);
+        exit();
+    } else {
+        $query = $conn->prepare("UPDATE rezervacija SET ime=:ime, prezime=:prezime, email=:email, datum=:datum, vrijeme=:vrijeme, broj_osoba=:broj_osoba, stanje=:stanje WHERE id=:id"); 
+            
+
+
+        $query->execute(array(
+            ':id' => $id,
+            ':ime' => $ime,
+            ':prezime' => $prezime,
+            ':email' => $email,
+            ':datum' => $datum,
+            ':vrijeme' => $vrijeme,
+            ':broj_osoba' => $broj_osoba,
+            ':stanje' => $stanje,
+            ));
+
+    
+
+            header("Location: ../admin/rezervacije/rezervacije.php?succes=uspjesnaIzmjenaPodataka");
+    }   
+
+    }
+
+    function otkaziRezervaciju($conn, $id) {
+    if (!$conn) {
+        header("Location: ../mojeRezervacije/mojeRezervacije.php?error=connectionfailed?" . $conn->error);
+        exit();
+    } else {
+        $query = $conn->prepare("UPDATE rezervacija SET stanje='poslan zahtjev za otkazivanje' WHERE id=:id"); 
+            
+
+
+        $query->execute(array(
+            ':id' => $id,
+            
+            ));
+
+    
+
+            header("Location: ../mojeRezervacije/mojeRezervacije.php?succes=zahtjevZaOtkazivanjePoslan");
+    }   
+
+    }
+
+
 
 
 ?>
