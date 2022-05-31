@@ -11,20 +11,25 @@
         $ime = $_POST ['ime'];
         $prezime = $_POST ['prezime'];
         $email = $_POST ['email'];
-        $adresa = $_POST ['adresa'];
+        $broj_telefona = $_POST ['broj_telefona'];
         $lozinka = $_POST ['lozinka'];
 
-        if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['adresa']) || empty($_POST['lozinka'])) {
-            header("location: ../admin/korisnici/urediKorisnika.php?error=praznapolja");
+        if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['broj_telefona']) || empty($_POST['lozinka'])) {
+            header("location: ../admin/korisnici/dodajKorisnika.php?error=praznapolja");
             exit();
         }
     
         if (emailExists($conn, $email) !== false) {
-            header("location: ../admin/korisnici/urediKorisnika.php?error=emailtaken");
+            header("location: ../admin/korisnici/dodajKorisnika.php?error=emailtaken");
             exit();
         }
     
-        dodajKorisnika($conn, $ime, $prezime, $email, $adresa, $lozinka);
+        if (validateEmail($conn, $email) !== false) {
+            header("location: ../admin/korisnici/dodajKorisnika.php?error=emailNijeIspravan");
+            exit();
+        }
+
+        dodajKorisnika($conn, $ime, $prezime, $email, $broj_telefona, $lozinka);
     }
     else {
         header("location: ../admin/korisnici/dodajKorisnika.php?error=Greskaa");

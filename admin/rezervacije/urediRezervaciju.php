@@ -30,7 +30,7 @@
 <body>
 
 
-    <div class="urediRezervaciju bg-dark">
+    <div class="urediRezervaciju">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
                 <div class="urediBox p-0 text-white p-0">
@@ -106,10 +106,44 @@
                             <div class="d-flex justify-content-center align-items-center">
                                 <label for="" class="w-100">Stanje</label>
                                 <select class="form-select w-100" aria-label="Default select example" name="stanje">
+                                    <?php 
+                                        if ($row['stanje'] === 'poslan zahtjev za otkazivanje') {
+                                        
+                                    ?>
+                                    <option selected><?= $row['stanje']; ?></option>
+                                    <option>Odbijen zahtjev za otkazivanje</option>
+                                    <option>Otkazano</option>
+                                    <?php 
+                                        }
+                                        elseif ($row['stanje'] === 'na čekanju') {
+                                    ?>
                                     <option selected><?= $row['stanje']; ?></option>
                                     <option>Prihvaćeno</option>
                                     <option>Odbijeno</option>
+
+                                    <?php 
+                                        }
+                                        elseif ($row['stanje'] === 'Prihvaćeno') {
+                                    ?>
+                                    <option selected><?= $row['stanje']; ?></option>
+                                    <option>Odbijeno</option>
+                                    <?php 
+                                        }
+                                        elseif ($row['stanje'] === 'Odbijeno') {
+                                    ?>
+                                    <option selected><?= $row['stanje']; ?></option>
+                                    <option>Prihvaćeno</option>
+                                    <?php 
+                                        }
+                                        elseif ($row['stanje'] === 'Odbijen zahtjev za otkazivanje') {
+                                    ?>
+                                    <option selected><?= $row['stanje']; ?></option>
                                     <option>Otkazano</option>
+                                    <?php 
+                                        }
+                                    ?>
+
+
                                 </select>
                             </div>
                         </div>
@@ -124,7 +158,7 @@
                         }
                     ?>
                     <div class="izlaz">
-                        <a href="rezervacije.php"><i class="bi bi-x"></i></a>
+                        <a href="rezervacije"><i class="bi bi-x"></i></a>
                     </div>
                 </div>
             </div>

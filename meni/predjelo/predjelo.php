@@ -35,7 +35,7 @@
     <div class="naslov">
         <nav class="navbar navigacija container-fluid navbar-expand-lg fixed-top">
             <div class="container-fluid container-lg">
-                <a class="navbar-brand" href="#"><img src="../../slike/logo.jpg" class="logo" alt=""></a>
+                <a class="navbar-brand" href="#"><img src="../../slike/logoo.png" class="logo" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bi bi-list fs-1 text-white"></span>
@@ -44,23 +44,23 @@
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
                         <li class="nav-item px-2 text-center">
                             <a class="nav-link text-white pb-1 position-relative" aria-current="page"
-                                href="../../index.php">POČETNA</a>
+                                href="../../index">POČETNA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1 position-relative" href="../../o-nama/o-nama.php">O
+                            <a class="nav-link text-white pb-1 position-relative" href="../../o-nama/o-nama">O
                                 NAMA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
                             <a class="nav-link  active text-white pb-1 position-relative"
-                                href="../meni/meni.php">MENI</a>
+                                href="../meni/meni">MENI</a>
                         </li>
                         <li class="nav-item px-2 text-center">
                             <a class="nav-link text-white pb-1 position-relative"
-                                href="../../galerija/galerija.php">GALERIJA</a>
+                                href="../../galerija/galerija">GALERIJA</a>
                         </li>
                         <li class="nav-item px-2 text-center">
                             <a class="nav-link text-white pb-1 position-relative"
-                                href="../../kontakt/kontakt.php">KONTAKT</a>
+                                href="../../kontakt/kontakt">KONTAKT</a>
                         </li>
 
                         <?php
@@ -85,7 +85,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li class="d-flex justify-content-center align-items-center">
                                             <a class="dropdown-item d-flex justify-beetwen align-items-center"
-                                                href="../../mojeRezervacije/mojeRezervacije.php">Rezervacije
+                                                href="../../mojeRezervacije/mojeRezervacije">Rezervacije
                                                 <span class="ms-3 px-2 text-success bg-dark rounded-circle">
                                                     <?php 
                                                             $email = $_SESSION['email'];
@@ -103,26 +103,8 @@
                                             </a>
 
                                         </li>
-                                        <li>
-                                            <a class="dropdown-item d-flex justify-beetwen align-items-center"
-                                                href="../../mojePoruke/mojePoruke.php">Poruke
-                                                <span class="ms-3 px-2 text-success bg-dark rounded-circle">
-                                                    <?php 
-                                                            $email = $_SESSION['email'];
-                                                            $stmt = $conn->prepare("SELECT ime, prezime, email, poruka FROM poruke WHERE email = ?");
-                                                            $stmt->execute(array($email));
-                                                            $row = $stmt->rowCount();
-                                                            if($row) {
-                                                                echo $row;
-                                                            }
-                                                            else {
-                                                                echo $row;
-                                                            }
-                                                        ?>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="../includes/logout.php">Odjava</a></li>
+                                        
+                                        <li><a class="dropdown-item" href="../includes/logout">Odjava</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -133,7 +115,7 @@
 			                ?>
                     </ul>
 
-                    <a href="prijava/prijava.php" class="btn prijava text-white">Prijava</a>
+                    <a href="../../prijava/prijava" class="btn prijava text-white">Prijava</a>
 
                     <?php 
                             }  
@@ -157,28 +139,28 @@
                         </div>
                         <ul class="navbar-nav flex-row justify-content-center flex-wrap">
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " aria-current="page" href="../meni.php">DORUČAK</a>
+                                <a class="nav-link " aria-current="page" href="../meni">DORUČAK</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
                                 <a class="nav-link active" href="">PREDJELO</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../juhe/juhe.php">JUHE</a>
+                                <a class="nav-link " href="../juhe/juhe">JUHE</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../glavno-jelo/glavno-jelo.php">GLAVNO JELO</a>
+                                <a class="nav-link " href="../glavno-jelo/glavno-jelo">GLAVNO JELO</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../palacinci/palacinci.php">PALAČINCI</a>
+                                <a class="nav-link " href="../palacinci/palacinci">PALAČINCI</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../kolaci/kolaci.php">KOLAČI</a>
+                                <a class="nav-link " href="../kolaci/kolaci">KOLAČI</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../sokovi/sokovi.php">SOKOVI</a>
+                                <a class="nav-link " href="../sokovi/sokovi">SOKOVI</a>
                             </li>
                             <li class="nav-item pe-2 ps-2">
-                                <a class="nav-link " href="../topli-napitci/topli-napitci.php">TOPLI NAPITCI</a>
+                                <a class="nav-link " href="../topli-napitci/topli-napitci">TOPLI NAPITCI</a>
                             </li>
                         </ul>
                         <div class="gif">
@@ -216,7 +198,7 @@
                             <div class="text">
                                 <h5 class="p-1 m-0">HLADNE PLATE</h5>
                                 <p>(suho meso, sudžuk, sir)</p>
-                                <h6 class="p-2 m-0">7KM</h6>
+                                <h6 class="p-2 m-0">0KM</h6>
                             </div>
                         </div>
                         <div class="box m-2">
@@ -226,7 +208,7 @@
                             <div class="text">
                                 <h5 class="p-1 m-0">UŠTIPCI</h5>
                                 <p>(domaće brašno, sir)</p>
-                                <h6 class="p-2 m-0">7KM</h6>
+                                <h6 class="p-2 m-0">0KM</h6>
                             </div>
                         </div>
                         <div class="box m-2">
@@ -236,7 +218,7 @@
                             <div class="text">
                                 <h5 class="p-1 m-0">SIR</h5>
                                 <p>(domaći)</p>
-                                <h6 class="p-2 m-0">7KM</h6>
+                                <h6 class="p-2 m-0">0KM</h6>
                             </div>
                         </div>
                         <div class="box m-2">
@@ -246,7 +228,7 @@
                             <div class="text">
                                 <h5 class="p-1 m-0">DIMLJENI SIR</h5>
                                 <p>(domaći)</p>
-                                <h6 class="p-2 m-0">7KM</h6>
+                                <h6 class="p-2 m-0">0KM</h6>
                             </div>
                         </div>
                     </div>
@@ -289,7 +271,7 @@
             </div>
         </div>
 
-        <div class="footer-copyright text-center py-3"><small>© 2020 Copyright:</small>
+        <div class="footer-copyright text-center py-3"><small>© 2022 Copyright:</small>
             <a href="" class="text-white text-decoration-none"><small>Ahmed</small></a>
         </div>
 

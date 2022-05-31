@@ -30,205 +30,150 @@
 </head>
 
 <body>
+    <div class="container-fluid px-4">
+        
+        <?php 
+            $email = $_SESSION['email'];
+            $stmt = $conn->prepare("SELECT * FROM rezervacija WHERE email = ?");
+            $stmt->execute(array($email));
+            $row = $stmt->rowCount();
+            if($row) {  
+        ?>
 
-    <!--
-    <div class="urediRezervaciju bg-dark">
-        <div class="container">
-            <div class="row d-flex justify-content-center align-items-center m-0">
-                <?php 
-            $email = $_SESSION ['email'];                            
-            $data = $conn->prepare("SELECT ime, prezime, email, datum, vrijeme, broj_osoba, stanje FROM rezervacija where email = ?");
-            $data->execute(array($email));
+        <div class="row my-5">
+            <h3 class="fs-4 mb-3">Moje rezervacije</h3>
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table bg-white rounded shadow-sm table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th hidden scope="col" width="50">#</th>
+                                <th scope="col">Ime</th>
+                                <th scope="col">Prezime</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Vrijeme</th>
+                                <th scope="col">Broj osoba</th>
+                                <th scope="col">Stanje</th>
+                                <th scope="col">Opcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php                             
+                                $email = $_SESSION ['email'];                            
+                                $data = $conn->prepare("SELECT id, ime, prezime, email, datum, vrijeme, broj_osoba, stanje FROM rezervacija where email = ?");
+                                $data->execute(array($email));
 
-            $result = $data->fetchAll(PDO::FETCH_ASSOC);
-            if($result)
-                {
-                    foreach($result as $row) {
-                        ?>
-                <div class="urediBox p-0 text-white p-0">
-                    <h3 class="text-center py-3">UREDI REZERVACIJU</h3>
+                                $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                                if($result)
+                                    {
+                                        foreach($result as $row) {
+                                            
+                            ?>
+                            <tr class="align-middle">
+                                <th hidden scope="row"><?php echo $row["id"] ?></th>
+                                <td><?php echo $row["ime"] ?></td>
+                                <td><?php echo $row["prezime"] ?></td>
+                                <td><?php echo $row["email"] ?></td>
+                                <td><?php echo $row["datum"] ?></td>
+                                <td><?php echo $row["vrijeme"] ?></td>
+                                <td><?php echo $row["broj_osoba"] ?></td>
+                                <td style="font-weight:bold; color: 
+                                            <?php if ($row['stanje'] === 'poslan zahtjev za otkazivanje') {
+                                                echo "blue"; }
+                                                    elseif ($row['stanje'] === 'Prihvaćeno') {
+                                                        echo "green";}
+                                                            elseif ($row['stanje'] === 'na čekanju' || $row['stanje'] === 'Odbijen zahtjev za otkazivanje') {
+                                                                echo "orange";}
+                                                                    elseif ($row['stanje'] === 'Odbijeno' || $row['stanje'] === 'Otkazano') {
+                                                                        echo "red";}
+                                            ?>">
+                                    <?php echo $row["stanje"] ?></td>
+                                <td class=" d-flex justify-content-center align-items-center">
 
 
 
-                    <form class="p-3" action="../../includes/urediRezervaciju.inc.php" method="POST">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Ime</label>
-                                <input type="text" class="form-control w-100" id="ime" name="ime" placeholder="Ime"
-                                    value="<?= $row['ime']; ?>">
-                            </div>
-                        </div>
+                                    <?php 
+                                        if($row['stanje'] === 'Otkazano' || $row['stanje'] === 'Odbijeno') {
+                                    ?>
+                                    <form action="../includes/urediRezervaciju.inc.php" method="POST">
+                                        <button type="submit" name="deleteR" class="btn btn-danger"
+                                            value="<?= $row['id']; ?>">
+                                            Izbrisi
+                                        </button>
+                                    </form>
+                                    <?php 
+                                        }
+                                        else if($row['stanje'] === 'poslan zahtjev za otkazivanje') {       
+                                    ?>
 
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Prezime</label>
-                                <input type="text" class="form-control w-100" id="prezime" name="prezime"
-                                    placeholder="prezime" value="<?= $row['prezime']; ?>">
-                            </div>
-                        </div>
+                                    <form action="../includes/urediRezervaciju.inc.php" method="POST">
+                                        <button type="submit" name="deleteR" class="btn btn-danger" disabled
+                                            value="<?= $row['id']; ?>">
+                                            Izbrisi
+                                        </button>
+                                    </form>
 
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Email</label>
-                                <input type="text" class="form-control w-100" id="email" name="email"
-                                    placeholder="email" value="<?= $row['email']; ?>">
-                            </div>
-                        </div>
+                                    <?php 
+                                        }
+                                        else if($row['stanje'] === 'Odbijen zahtjev za otkazivanje') {       
+                                    ?>
 
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Datum</label>
-                                <input type="text" class="form-control w-100" id="datum" name="datum"
-                                    placeholder="datum" value="<?= $row['datum']; ?>">
-                            </div>
-                        </div>
+                                    <a href="otkaziRezervaciju.php?id=<?= $row['id'] ?>" class="btn
+                                    btn-primary me-2">Otkaži</a>
 
-                        <div class="mb-3">
-                            <div class="d-flex jutify-content-center align-items-center">
-                                <label for="" class="w-100">Vrijeme</label>
-                                <input type="text" class="form-control w-100" id="vrijeme" name="vrijeme"
-                                    placeholder="Vrijeme" value="<?= $row['vrijeme']; ?>">
-                            </div>
-                        </div>
+                                    <?php 
+                                        }
+                                        else {
+                                    ?>
 
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Broj osoba</label>
-                                <input type="text" class="form-control w-100" id="broj_osoba" name="broj_osoba"
-                                    placeholder="broj_osoba" value="<?= $row['broj_osoba']; ?>">
-                            </div>
-                        </div>
+                                    <a href="otkaziRezervaciju.php?id=<?= $row['id'] ?>" class="btn
+                                    btn-primary me-2">Otkaži</a>
 
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <label for="" class="w-100">Stanje</label>
-                                <select class="form-select w-100" aria-label="Default select example" name="stanje">
-                                    <option selected><?= $row['stanje']; ?></option>
-                                    <option>Prihvati</option>
-                                    <option>Odbij</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="d-grid mb-3">
-                            <button class="btn text-white" type="submit" name="update">SPREMI PROMJENE</button>
-                        </div>
-
-                    </form>
-
-                    <div class="izlaz">
-                        <a href="rezervacije.php"><i class="bi bi-x"></i></a>
-                    </div>
+                                    <?php 
+                                        }    
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php
+                                }
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-                <?php
-                        }
-                        }
-                    ?>
             </div>
         </div>
+
+        <?php
+        }
+        else {
+        
+        ?>
+        <div class="row my-5">
+            <div class="alert alert-danger text-center" role="alert">
+                Trenutno nemate rezervacija!
+            </div>
+        </div>
+        <?php
+        } 
+        ?>
+
     </div>
 
-                    -->
 
 
 
 
 
-    <div class="mojerezervacije container">
-        <h1 class="text-white text-center bg-dark p-5 rounded-bottom">MOJE REZERVACIJE</h1>
-        <div class="row d-flex justify-content-center">
 
-            <?php 
-            $email = $_SESSION ['email'];                            
-            $data = $conn->prepare("SELECT id, ime, prezime, email, datum, vrijeme, broj_osoba, stanje FROM rezervacija where email = ?");
-            $data->execute(array($email));
-
-            $result = $data->fetchAll(PDO::FETCH_ASSOC);
-            if($result)
-                {
-                    foreach($result as $row) {
-                        ?>
-            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
-                <div
-                    class="rezervacija d-flex justify-content-center flex-column align-items-center bg-dark text-white rounded">
-                    <h3 class="text-center py-3 w-100 rounded-top" style="background-color: <?php if($row['stanje'] === 'Otkazano' || $row['stanje'] === 'Odbijeno') {
-                            echo "red";
-                        } 
-                        elseif($row['stanje'] === 'na čekanju'){
-                            echo "orange";
-                        }
-                         elseif($row['stanje'] === 'poslan zahtjev za otkazivanje'){
-                            echo "blue";
-                        }
-                        else {
-                        echo "green";
-                        }?>">
-                        MOJA REZERVACIJA
-                    </h3>
-                    <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                        <div class="fw-bold">
-                            <p>Ime</p>
-                            <p>Prezime</p>
-                            <p>Email</p>
-                            <p>Datum</p>
-                            <p>Vrijeme</p>
-                            <p>Broj osoba</p>
-                            <p>Stanje</p>
-                        </div>
-                        <div class="text-center">
-                            <?php                 
-                                echo "<p>$row[ime]</p>";
-                                echo "<p>$row[prezime]</p>";
-                                echo "<p>$row[email]</p>";
-                                echo "<p>$row[datum]</p>";
-                                echo "<p>$row[vrijeme]</p>";
-                                echo "<p>$row[broj_osoba]</p>";
-                                echo "<p>$row[stanje]</p>";
-                        ?>
-                        </div>
-                    </div>
-                    <div class="opcije p-2 d-flex">
-                        <?php 
-                            if($row['stanje'] === 'Otkazano' || $row['stanje'] === 'Odbijeno') {
-                        ?>
-                        <form action="../includes/urediRezervaciju.inc.php" method="POST">
-                            <button type="submit" name="deleteR" class="btn btn-danger" value="<?= $row['id']; ?>">
-                                Izbrisi
-                            </button>
-                        </form>
-                        <?php 
-                            }
-                            else if($row['stanje'] === 'poslan zahtjev za otkazivanje') {
-                                
-                        ?>
-
-                        <?php 
-                            }
-                            else {
-                        ?>
-
-                        <a href="otkaziRezervaciju.php?id=<?= $row['id'] ?>" class="btn
-                        btn-secondary me-2">Otkaži</a>
-
-                        <?php 
-                            }    
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <?php
-            }
-            }
-            ?>
-
-        </div>
-        <a href=" ../index.php" class="btn btn-danger text-decoration-none text-white d-block m-auto"
-            style="width:max-content;">Nazad</a>
+    <a href=" ../index.php" class="btn btn-danger text-decoration-none text-white d-block m-auto"
+        style="width:max-content;">Nazad</a>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 
     </div>
 

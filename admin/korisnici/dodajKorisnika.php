@@ -30,7 +30,7 @@
 <body>
 
 
-    <div class="urediKorisnika bg-dark">
+    <div class="dodajKorisnika">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
                 <div class="urediBox p-0 text-white p-0">
@@ -52,7 +52,7 @@
                                 required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="adresa" name="adresa" placeholder="Adresa"
+                            <input type="text" class="form-control" id="broj_telefona" name="broj_telefona" placeholder="Broj telefona"
                                 required>
                         </div>
                         <div class="mb-3">
@@ -65,7 +65,7 @@
 
                     </form>
                     <div class="izlaz">
-                        <a href="korisnici.php"><i class="bi bi-x"></i></a>
+                        <a href="korisnici"><i class="bi bi-x"></i></a>
                     </div>
                 </div>
             </div>

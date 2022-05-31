@@ -1,8 +1,6 @@
 <?php
 	require '../includes/baza.php';
 	session_start();
-
-    
 ?>
 
 <!doctype php>
@@ -17,52 +15,61 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-        <link rel="stylesheet" href="../css/icon/css/all.min.css" />
-
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+        <!-- CSS -->
         <link rel="stylesheet" href="kontakt.css">
+        <link rel="stylesheet" href="../css/icon/css/all.min.css" />
 
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Comforter&family=Courgette&family=Creepster&family=Gloria+Hallelujah&family=Rammetto+One&family=Sofia&family=Ultra&display=swap');
+        </style>
+
+        <style>
+        .box {
+            border-radius: 10px;
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+            max-width: 950px;
+        }
         </style>
 
         <title>Oaza</title>
     </head>
 
     <body>
+        <div class="naslov">
+            <nav class="navbar navigacija container-fluid navbar-expand-lg fixed-top">
+                <div class="container-fluid container-lg">
+                    <a class="navbar-brand" href="#"><img src="../slike/logoo.png" class="logo" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="bi bi-list fs-1 text-white"></span>
+                    </button>
+                    <div class="collapse navbar-collapse text-center" id="navbarNav">
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li class="nav-item px-2 text-center">
+                                <a class="nav-link  text-white pb-1 position-relative" aria-current="page"
+                                    href="../index">POČETNA</a>
+                            </li>
+                            <li class="nav-item px-2 text-center">
+                                <a class="nav-link text-white pb-1 position-relative" href="../o-nama/o-nama">O
+                                    NAMA</a>
+                            </li>
+                            <li class="nav-item px-2 text-center">
+                                <a class="nav-link text-white pb-1 position-relative" href="../meni/meni">MENI</a>
+                            </li>
+                            <li class="nav-item px-2 text-center">
+                                <a class="nav-link text-white pb-1 position-relative"
+                                    href="../galerija/galerija">GALERIJA</a>
+                            </li>
+                            <li class="nav-item px-2 text-center">
+                                <a class="nav-link active text-white pb-1 position-relative" href="#">KONTAKT</a>
+                            </li>
 
-
-        <nav class="navbar navigacija container-fluid navbar-expand-lg fixed-top">
-            <div class="container-fluid container-lg test">
-                <a class="navbar-brand" href="#"><img src="../slike/logo.jpg" class="logo" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="bi bi-list"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
-                        <li class="nav-item px-2 text-center">
-                            <a class="nav-link  text-white pb-1 position-relative" aria-current="page"
-                                href="../index.php">POČETNA</a>
-                        </li>
-                        <li class="nav-item px-2 text-center">
-                            <a class="nav-link  text-white pb-1 position-relative" href="../o-nama/o-nama.php">O
-                                NAMA</a>
-                        </li>
-                        <li class="nav-item px-2 text-center">
-                            <a class="nav-link  text-white pb-1 position-relative" href="../meni/meni.php">MENI</a>
-                        </li>
-                        <li class="nav-item px-2 text-center">
-                            <a class="nav-link text-white pb-1 position-relative"
-                                href="../galerija/galerija.php">GALERIJA</a>
-                        </li>
-                        <li class="nav-item px-2 text-center">
-                            <a class="nav-link active text-white pb-1 position-relative" href="">KONTAKT</a>
-                        </li>
-                        <?php
+                            <?php
                                 if(isset($_SESSION['email']))
                                 {
                                     $id = $_SESSION['email'];
@@ -71,22 +78,22 @@
                                     $fetch = $sql->fetch();
 			                ?>
 
-                        <li class="px-2 text-center user" style="margin-left: 40px;">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                <li class="dropdown">
-                                    <a class="btn btn-success dropdown-toggle second-text fw-bold text-white" href="#"
-                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fas fa-user me-2"></i>
-                                        <?php echo $fetch['ime']?>
-                                        <?php echo $fetch['prezime']?>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li class="d-flex justify-content-center align-items-center">
-                                            <a class="dropdown-item d-flex justify-beetwen align-items-center"
-                                                href="../mojeRezervacije/mojeRezervacije.php">Rezervacije
-                                                <span class="ms-3 px-2 text-success bg-dark rounded-circle">
-                                                    <?php 
+                            <li class="px-2 text-center user" style="margin-left: 40px;">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                    <li class="dropdown">
+                                        <a class="btn btn-success dropdown-toggle second-text fw-bold text-white"
+                                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user me-2"></i>
+                                            <?php echo $fetch['ime']?>
+                                            <?php echo $fetch['prezime']?>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li class="d-flex justify-content-center align-items-center">
+                                                <a class="dropdown-item d-flex justify-beetwen align-items-center"
+                                                    href="../mojeRezervacije/mojeRezervacije">Rezervacije
+                                                    <span class="ms-3 px-2 text-success bg-dark rounded-circle">
+                                                        <?php 
                                                             $email = $_SESSION['email'];
                                                             $stmt = $conn->prepare("SELECT ime, prezime, email, datum, vrijeme, broj_osoba FROM rezervacija WHERE email = ?");
                                                             $stmt->execute(array($email));
@@ -98,15 +105,15 @@
                                                                 echo $row;
                                                             }
                                                         ?>
-                                                </span>
-                                            </a>
+                                                    </span>
+                                                </a>
 
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item d-flex justify-beetwen align-items-center"
-                                                href="../mojePoruke/mojePoruke.php">Poruke
-                                                <span class="ms-3 px-2 text-success bg-dark rounded-circle">
-                                                    <?php 
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item d-flex justify-beetwen align-items-center"
+                                                    href="../mojePoruke/mojePoruke">Poruke
+                                                    <span class="ms-3 px-2 text-success bg-dark rounded-circle">
+                                                        <?php 
                                                             $email = $_SESSION['email'];
                                                             $stmt = $conn->prepare("SELECT ime, prezime, email, poruka FROM poruke WHERE email = ?");
                                                             $stmt->execute(array($email));
@@ -118,53 +125,49 @@
                                                                 echo $row;
                                                             }
                                                         ?>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="../includes/logout.php">Odjava</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <?php
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="../includes/logout">Odjava</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <?php
                                 }   
                                 else {
 			                ?>
-                    </ul>
+                        </ul>
 
-                    <a href="../prijava/prijava.php" class="btn prijava text-white">Prijava</a>
+                        <a href="../prijava/prijava" class="btn prijava text-white">Prijava</a>
 
-                    <?php 
+                        <?php 
                             }  
                         ?>
+
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+            <h1>KONTAKT</h1>
+
+        </div>
 
 
+        <!------------------ Kontakt ------------------>
 
-
-
-
-        <div class="contact d-flex justify-content-center align-items-center"
-            style="height: max-content; min-height: 100vh; padding: 100px 0;">
+        <div class="kontakt d-flex justify-content-center align-items-center">
             <div class="container" style="height:max-content">
-                <div class="row bg-dark text-light testt"
-                    style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-radius: 7px;">
+                <div class="row box">
                     <div class="col-md-6 col-lg-5 jedan py-4">
                         <h3>KONTAKT</h3>
-                        <form action="../includes/kontakt.inc.php" method="POST">
+                        <form class="kontakt-forma" method="POST">
 
-                            <?php 
-                            
-                            if(isset($_SESSION['email']))
-                                {
+                            <?php   
+                                if(isset($_SESSION['email'])) {
                                     $id = $_SESSION['email'];
                                     $sql = $conn->prepare("SELECT * FROM `korisnici` WHERE `email`='$id'");
                                     $sql->execute();
-                                    $fetch = $sql->fetch();
-                                
+                                    $fetch = $sql->fetch();        
 			                ?>
 
                             <div class="row">
@@ -175,7 +178,7 @@
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="perzime" class="form-label">Prezime</label>
-                                    <input type="text" name="prezime" class="form-control" id="perzime"
+                                    <input type="text" name="prezime" class="form-control" id="prezime"
                                         value=" <?php echo $fetch['prezime']?>" placeholder="Prezime" readonly>
                                 </div>
                             </div>
@@ -186,16 +189,15 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" name="poruka" placeholder="Leave a comment here"
-                                    id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label class="text-dark" for="floatingTextarea2">Poruka</label>
+                                    id="poruka" style="height: 100px"></textarea>
+                                <label class="text-dark" for="poruka">Poruka</label>
                             </div>
 
                             <?php 
-                            
-                            }
-                            else {
-                                    
+                                }
+                                else {     
 			                ?>
+
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
                                     <label for="ime" class="form-label">Ime</label>
@@ -219,7 +221,7 @@
                             </div>
 
                             <?php 
-                            }
+                                }
                             ?>
 
                             <button type="submit" name="submit" class="btn btn-warning">Pošalji</button>
@@ -240,8 +242,9 @@
         </div>
 
 
-        <!-- Footer -->
-        <footer class="text-light" style="background-color: rgb(7, 7, 7);">
+        <!-------------- Footer ------------->
+
+        <footer class="text-light">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 d-flex justify-content-center">
@@ -271,54 +274,42 @@
                 </div>
             </div>
 
-            <div class="footer-copyright text-center py-3"><small>© 2020 Copyright:</small>
+            <div class="footer-copyright text-center py-3"><small>© 2022 Copyright:</small>
                 <a href="" class="text-white text-decoration-none"><small>Ahmed</small></a>
             </div>
 
         </footer>
-        <!-- Footer -->
 
 
+        <!-- javaScript -->
+        <script src="../javaScript/javaScript.js"></script>
 
-
-
-
-
-
+        <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
 
+        <!------------------ Kontakt forma ------------------>
         <script>
-        var nav = document.querySelector('nav');
-        var test = document.querySelector('.test');
-        var toggler = document.querySelector('.navbar-toggler');
+        document.querySelector(".kontakt-forma").addEventListener("submit", submitForm);
 
+        function submitForm(e) {
+            e.preventDefault();
 
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 5) {
-                nav.classList.add("navbar-scroll");
-            } else {
-                nav.classList.remove("navbar-scroll");
-            }
-        })
+            let ime = document.getElementById("ime").value;
+            let prezime = document.getElementById("prezime").value;
+            let email = document.getElementById("email").value;
+            let poruka = document.getElementById("poruka").value;
 
+            document.querySelector(".kontakt-forma").reset();
 
-        toggler.onclick = function() {
-            toggler.classList.toggle('active');
-            nav.classList.toggle('active');
+            sendEmail(ime, prezime, email, poruka);
+        }
 
+        function sendEmail(ime, prezime, email, poruka) {
+            window.location.href = `mailto:restoranoaza10@gmail.com?cc=${email}&subject=test&body=${poruka}`;
         }
         </script>
-        <script>
-
-
-
-
-        </script>
-
-
-
 
     </body>
 

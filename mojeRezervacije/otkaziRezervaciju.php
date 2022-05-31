@@ -30,11 +30,11 @@
 <body>
 
 
-    <div class="urediRezervaciju bg-dark">
+    <div class="urediRezervaciju">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
                 <div class="urediBox p-0 text-white p-0">
-                    <h3 class="text-center py-3">UREDI REZERVACIJU</h3>
+                    <h3 class="text-center py-3">OTKAŽI REZERVACIJU</h3>
 
 
                     <?php 

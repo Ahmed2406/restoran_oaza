@@ -1,5 +1,10 @@
 <?php 
-    require_once '../../includes/baza.php';
+    require '../../includes/baza.php';
+    session_start();
+    
+      if(!isset($_SESSION['username'])) {
+      header("Location: ../prijava/prijava.php");  
+      }
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +18,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/icon/css/all.min.css" />
     <link rel="stylesheet" href="rezervacije.css" />
-    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <title>Admin Dashboard</title>
 </head>
 
 <body>
@@ -23,18 +28,19 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fa-solid fa-bowl-food me-2"></i>OAZA</div>
             <div class="list-group list-group-flush my-3">
-                <a href="../admin.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../dashboard/dashboard"
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="../korisnici/korisnici.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../korisnici/korisnici"
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fa-solid fa-users me-2"></i>Korisnici</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active fw-bold"><i
+                <a href="#" class="list-group-item list-group-item bg-transparent second-text active fw-bold"><i
                         class="fa-solid fa-book me-2"></i>Rezervacije</a>
-                <a href="../poruke/poruke.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href=""
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fa-solid fa-message me-2"></i>Poruke</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="../../includes/adminLogout"
+                    class="logout list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
@@ -64,7 +70,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profil</a></li>
                                 <li><a class="dropdown-item" href="#">Postavke</a></li>
-                                <li><a class="dropdown-item" href="#">Odjava</a></li>
+                                <li><a class="dropdown-item" href="../../includes/adminLogout">Odjava</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -94,13 +100,13 @@
                                     <?php                             
                                         $data = $conn->prepare("SELECT id, ime, prezime, email, datum, vrijeme, broj_osoba, stanje FROM rezervacija");
                                         $data->execute();
-
+                                        $number = 1;
                                         $result = $data->fetchAll(PDO::FETCH_ASSOC);
                                         if($result) {
                                             foreach($result as $row) {
                                     ?>
                                     <tr class="align-middle">
-                                        <th scope="row"><?php echo $row["id"] ?></th>
+                                        <th scope="row"><?php echo $number ?></th>
                                         <td><?php echo $row["ime"] ?></td>
                                         <td><?php echo $row["prezime"] ?></td>
                                         <td><?php echo $row["email"] ?></td>

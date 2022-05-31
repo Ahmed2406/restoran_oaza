@@ -7,6 +7,9 @@
 
  <?php
 
+
+/* ------------------- IZBRISI KORISNIKA -------------- */
+
  if (isset($_POST["delete"])) {
         $id = $_POST['delete'];
 
@@ -29,23 +32,32 @@
 
 
 
-
+/* ------------------- UREDI KORISNIKA -------------- */
 
     if (isset($_POST["update"])) {
         $id = $_POST['id'];
         $ime = $_POST ['ime'];
         $prezime = $_POST ['prezime'];
         $email = $_POST ['email'];
-        $adresa = $_POST ['adresa'];
+        $broj_telefona = $_POST ['broj_telefona'];
         $lozinka = $_POST ['lozinka'];
 
-        if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['adresa']) || empty($_POST['lozinka'])) {
+        if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['broj_telefona']) || empty($_POST['lozinka'])) {
             header("location: ../admin/korisnici/urediKorisnika.php?error=praznapolja");
             exit();
         }
     
-    
-        updateUser($conn, $id, $ime, $prezime, $email, $adresa, $lozinka);
+        if (emailExists($conn, $email) !== false) {
+                header("location: ../admin/korisnici/urediKorisnika.php?error=emailtaken");
+                exit();
+            }
+
+        if (validateEmail($conn, $email) !== false) {
+            header("location: ../admin/korisnici/urediKorisnika.php?error=emailNijeIspravan");
+            exit();
+        }
+
+        updateUser($conn, $id, $ime, $prezime, $email, $broj_telefona, $lozinka);
     }
  
 

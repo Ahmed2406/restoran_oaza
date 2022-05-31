@@ -30,7 +30,7 @@
 <body>
 
 
-    <div class="urediKorisnika bg-dark">
+    <div class="urediKorisnika">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
                 <div class="urediBox p-0 text-white p-0">
@@ -41,7 +41,7 @@
                         if(isset($_GET['id'])) {
                             $id = $_GET['id'];
 
-                            $data = $conn->prepare("SELECT id, ime, prezime, email, adresa, lozinka FROM korisnici WHERE id=:id");
+                            $data = $conn->prepare("SELECT id, ime, prezime, email, broj_telefona, lozinka FROM korisnici WHERE id=:id");
                             $data->execute([':id' => $id]);
                             
                             $result = $data->fetchAll(PDO::FETCH_ASSOC);
@@ -68,11 +68,11 @@
                                 value="<?= $row['email']; ?>" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="adresa" name="adresa" placeholder="Adresa"
-                                value="<?= $row['adresa']; ?>" required>
+                            <input type="text" class="form-control" id="broj_telefona" name="broj_telefona" placeholder="Broj telefona"
+                                value="<?= $row['broj_telefona']; ?>" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="lozinka" name="lozinka" placeholder="Lozinka"
+                            <input type="password" class="form-control" id="lozinka" name="lozinka" placeholder="Lozinka"
                                 value="<?= $row['lozinka']; ?>" required>
                         </div>
                         <div class="d-grid mb-3">
@@ -85,7 +85,7 @@
                                         }
                                     ?>
                     <div class="izlaz">
-                        <a href="korisnici.php"><i class="bi bi-x"></i></a>
+                        <a href="korisnici"><i class="bi bi-x"></i></a>
                     </div>
                 </div>
             </div>

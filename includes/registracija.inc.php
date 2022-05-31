@@ -11,14 +11,10 @@
         $ime = $_POST ['ime'];
         $prezime = $_POST ['prezime'];
         $email = $_POST ['email'];
-        $adresa = $_POST ['adresa'];
+        $broj_telefona = $_POST ['broj_telefona'];
         $lozinka = $_POST ['lozinka'];
         $potvrda_lozinke = $_POST ['potvrda_lozinke'];
 
-        if(empty($_POST['ime']) || empty($_POST['prezime']) || empty($_POST['email']) || empty($_POST['adresa']) || empty($_POST['lozinka']) || empty($_POST['potvrda_lozinke'])) {
-            header("location: ../registracija/registracija.php?error=praznapolja");
-            exit();
-        }
     
         if (pwdMatch($lozinka, $potvrda_lozinke) !== false) {
             header("location: ../registracija/registracija.php?error=passworddontmatch");
@@ -29,8 +25,13 @@
             header("location: ../registracija/registracija.php?error=emailtaken");
             exit();
         }
+
+        if (validateEmail($conn, $email) !== false) {
+            header("location: ../registracija/registracija.php?error=emailNijeIspravan");
+            exit();
+        }
     
-        createUser($conn, $ime, $prezime, $email, $adresa, $lozinka);
+        createUser($conn, $ime, $prezime, $email, $broj_telefona, $lozinka);
     }
     else {
         header("location: ../registracija/registracija.php");

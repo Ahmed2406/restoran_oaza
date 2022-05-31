@@ -2,8 +2,10 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 body {
-    background-color: rgb(185,185,185);
+    background-color: rgb(247, 244, 244);
 }
+
+/* ----------------------------- NAVIGACIJA ----------------------------- */
 
 .navigacija {
     top: 10px;
@@ -38,11 +40,11 @@ body {
     .navbar .nav-item .nav-link:hover:after {
         width: 0;
     }
-    .navbar .navbar .nav-item .active,
-    .navbar .navbar .nav-link:hover {
+    .navbar  .nav-item .active,
+     .navbar .nav-link:hover {
         color: rgb(204, 133, 0) !important;
     }
-    .navbar .navbar .prijava {
+    .navbar .prijava {
         margin-left: 0 !important;
     }
     .navbar .user {
@@ -101,19 +103,17 @@ body {
 
 /* ----------------------------- MENI ----------------------------- */
 
-
 .meni {
-    border-radius: 7px;
-    -webkit-box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81); 
-    box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81);
+    border-radius: 10px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 .meni-ponuda {
-    background: rgb(36, 36, 36);
     border-radius: 0 0 7px 7px;
+    padding-bottom: 40px;
 }
 .meni .meni-header {
-    background: rgb(165, 69, 0);
     border-radius: 7px 7px 0 0;
+    border-bottom: 1px solid rgb(12, 12, 12);
 }
 .meni .meni-header .gif img {
     width: 60px;
@@ -126,13 +126,15 @@ body {
 }
 .meni .meni-header ul li .active,
 .meni .meni-header ul li a:hover {
-    color: white;
+    color: rgb(241, 159, 7);
 }
 
 .meni .meni-ponuda .ponuda-text {
     text-align: center;
-    color: white;
+    color: rgb(241, 159, 7);
     padding: 10px 0;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 .meni .meni-ponuda .ponuda-text .line1, .line2 {
     width: 100px;
@@ -147,24 +149,25 @@ body {
 }
 .meni .meni-ponuda .box {
     width: 210px;
-    height: 290px;
-    background-color: rgb(197, 197, 197);
+    min-height: 330px;
+    background-color: rgb(247, 245, 245);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 4px 4px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     cursor: pointer;
+    transition: all .4s ease-in-out;
+    border: 1px solid rgb(207, 207, 207);
 }
 .meni .meni-ponuda .box:hover {
-    background: rgb(158, 158, 158);
-    transform: scale(1.01);
+    transform: translateY(-5px);
 }
 .meni .meni-ponuda .box .slika {
-    height: 100%;
+    min-height: 180px;
 }
 .ponuda .box img {
     width: 100%;
-    height: 100%;
+    height: 180px;
     border-radius: 10px 10px 0 0;
     object-fit: cover;
 }
@@ -174,14 +177,19 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 10px;
 }
+
 .ponuda .box .text h6 {
     color: rgb(165, 69, 0);
     font-weight: bold;
 }
 
+
+/* ----------------------------- FOOTER ----------------------------- */
+
 footer {
-    background-color: black;
+    background-color: rgb(12, 12, 12);
 }
 footer .ikone i {
     transition: .5s;

@@ -1,5 +1,10 @@
-<?php 
-    require_once '../includes/baza.php';
+<?php
+	require '../../includes/baza.php';
+    session_start();
+    
+      if(!isset($_SESSION['username'])) {
+      header("Location: ../prijava/prijava");  
+      }
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/icon/css/all.min.css" />
-    <link rel="stylesheet" href="admin.css" />
-    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <link rel="stylesheet" href="../../css/icon/css/all.min.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <title>Admin Dashboard</title>
 </head>
 
 <body>
@@ -23,18 +28,19 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fa-solid fa-bowl-food me-2"></i>OAZA</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="#" class="list-group-item list-group-item bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="korisnici/korisnici.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../korisnici/korisnici"
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fa-solid fa-users me-2"></i>Korisnici</a>
-                <a href="rezervacije/rezervacije.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../rezervacije/rezervacije"
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fa-solid fa-book me-2"></i>Rezervacije</a>
-                <a href="poruke/poruke.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href=""
+                    class="list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fa-solid fa-message me-2"></i>Poruke</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="../../includes/adminLogout"
+                    class="logout list-group-item list-group-item bg-transparent second-text fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
@@ -64,7 +70,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profil</a></li>
                                 <li><a class="dropdown-item" href="#">Postavke</a></li>
-                                <li><a class="dropdown-item" href="#">Odjava</a></li>
+                                <li><a class="dropdown-item" href="../../includes/adminLogout">Odjava</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -109,19 +115,13 @@
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">
-                                    <?php $data = $conn->prepare("SELECT id FROM poruke");
-                                        $data->execute();
-                                        $num = $data->rowCount(); 
-                                        echo $num 
-                                    ?>
+                                    0
                                 </h3>
                                 <p class="fs-5">Poruke</p>
                             </div>
                             <i class="fa-solid fa-message fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

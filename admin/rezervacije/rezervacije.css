@@ -27,14 +27,7 @@
 
 #wrapper {
   overflow-x: hidden;
-  background-image: linear-gradient(
-    to right,
-    #baf3d7,
-    #c2f5de,
-    #cbf7e4,
-    #d4f8ea,
-    #ddfaef
-  );
+  background-color: rgb(247, 244, 244);
 }
 
 #sidebar-wrapper {
@@ -70,13 +63,22 @@
 .list-group-item {
   border: none;
   padding: 20px 30px;
+  transition: .4s all ease;
 }
+
+.logout:hover {
+  color: red;
+}
+
 
 .list-group-item.active {
   background-color: transparent;
   color: var(--main-text-color);
   font-weight: bold;
   border: none;
+}
+.list-group-item:hover {
+  color: var(--main-text-color);
 }
 
 @media (min-width: 992px) {
@@ -99,20 +101,21 @@
 
 
 
+.urediRezervaciju {
+  background-color: rgb(160, 160, 160) ;
+}
+
 .urediBox {
-    background-color: rgb(27, 27, 27);
     border-radius: 10px;
-    -webkit-box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81); 
-    box-shadow: 4px -2px 13px 3px rgba(0,0,0,0.81);
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border: 1px solid rgb(121, 120, 120);
     max-width: 500px;
     margin: auto;
     position: relative;
 }
 
-
-
 .urediRezervaciju h3 {
-    background-color: rgb(204, 133, 0);
+    background-color: rgb(46, 46, 46);
     border-radius: 10px 10px 0 0;
 }
 .urediRezervaciju .btn {

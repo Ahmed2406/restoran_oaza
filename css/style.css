@@ -2,6 +2,8 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* ----------- NAVIGACIJA -------------- */
+
 .navigacija {
     top: 10px;
     border-radius: 3px;
@@ -90,11 +92,11 @@
     height: 100vh;
 }
 
-.pocetna .jedan {
+.pocetna .box {
     height: 100vh;
 }
 
-.pocetna .jedan .btn {
+.pocetna .box .btn {
     border: 2px solid white;
     color: rgb(255, 255, 255);
     margin: 20px 0;
@@ -103,12 +105,12 @@
     transition: all .7s ease-out;
 }
 
-.pocetna .jedan .btn:hover {
+.pocetna .box .btn:hover {
     background-color: rgb(204, 133, 0);
     border: 2px solid rgb(204, 133, 0);
 }
 
-.pocetna .jedan a img {
+.pocetna .box a img {
     width: 20px;
     height: 20px;
     margin-right: 5px;
@@ -140,8 +142,12 @@ h6 {
     width: 100px;
     background-color: rgb(204, 133, 0);
 }
+
+
+/* ----------- FOOTER -------------- */
+
 footer {
-    background-color: black;
+    background-color: rgb(12, 12, 12);
 }
 footer .ikone i {
     transition: .5s;
